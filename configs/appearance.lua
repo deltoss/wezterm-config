@@ -1,3 +1,5 @@
+local wezterm = require("wezterm")
+local mux = wezterm.mux
 local module = {}
 
 -- The suggested convention for making modules that update
@@ -8,5 +10,11 @@ function module.apply_to_config(config)
 	-- See: https://wezterm.org/colorschemes/index.html
 	config.color_scheme = "Catppuccin Latte"
 end
+
+-- Maximize window on start
+wezterm.on("gui-startup", function()
+	local tab, pane, window = mux.spawn_window({})
+	window:gui_window():maximize()
+end)
 
 return module
