@@ -15,21 +15,21 @@ config.launch_menu = {
 		},
 	},
 	{
-		label = "Lazygit",
+		label = "lf",
 		args = {
-			"lazygit",
+			"lf",
+		},
+	},
+	{
+		label = "LazyGit",
+		args = {
+			"LazyGit",
 		},
 	},
 	{
 		label = "LazyDocker",
 		args = {
-			"lazydocker",
-		},
-	},
-	{
-		label = "lfcd",
-		args = {
-			"lfcd",
+			"LazyDocker",
 		},
 	},
 }
