@@ -9,3 +9,17 @@
   </a>
 </p>
 
+## Getting Started
+
+1. Install `WezTerm` with `winget`:
+
+   ```powershell
+   winget install --id=wez.wezterm  -e
+   ```
+
+2. Run the below command
+
+   ```powershell
+   git clone git@github.com:deltoss/wezterm-config.git "${env:USERPROFILE}\.config\wezterm"
+   ```
+
