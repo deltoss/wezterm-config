@@ -131,6 +131,11 @@ function module.apply_to_config(config)
 				end),
 			}),
 		},
+		{
+			key = "z",
+			mods = "CTRL|ALT",
+			action = wezterm.action.TogglePaneZoomState,
+		},
 	}
 end
 
