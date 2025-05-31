@@ -8,6 +8,7 @@ require("configs.multiplexer").apply_to_config(config)
 require("configs.launch").apply_to_config(config)
 require("configs.ssh").apply_to_config(config)
 require("configs.appearance").apply_to_config(config)
+require("configs.tabtitle").apply_to_config(config)
 require("configs.keys").apply_to_config(config)
 require("plugins.smart-splits-nvim").apply_to_config(config)
 
