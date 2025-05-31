@@ -7,6 +7,11 @@ local module = {}
 -- the config is for them to export an `apply_to_config`
 -- function that accepts the config object.
 function module.apply_to_config(config)
+	config.leader = {
+		key = "Insert",
+		mods = "",
+		timeout_milliseconds = 5000,
+	}
 	config.keys = {
 		{
 			key = "PageDown",
@@ -136,7 +141,37 @@ function module.apply_to_config(config)
 			mods = "CTRL|ALT",
 			action = wezterm.action.TogglePaneZoomState,
 		},
+		{
+			key = ";",
+			mods = "CTRL",
+			-- Based on: https://github.com/wezterm/wezterm/discussions/3779#discussioncomment-8923369
+			action = wezterm.action_callback(function(_, pane)
+				local tab = pane:tab()
+				local panes = tab:panes_with_info()
+				if #panes == 1 then
+					pane:split({
+						direction = "Bottom",
+						size = 0.4,
+					})
+				elseif not panes[1].is_zoomed then
+					panes[1].pane:activate()
+					tab:set_zoomed(true)
+				elseif panes[1].is_zoomed then
+					tab:set_zoomed(false)
+					panes[2].pane:activate()
+				end
+			end),
+		},
 	}
+
+	for i = 0, 9 do
+		-- leader + number to activate that tab
+		table.insert(config.keys, {
+			key = tostring(i),
+			mods = "LEADER",
+			action = wezterm.action.ActivateTab(i),
+		})
+	end
 end
 
 return module
