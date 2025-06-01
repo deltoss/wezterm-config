@@ -1,5 +1,3 @@
-require("events.maximize-window")
-
 local wezterm = require("wezterm")
 
 local config = wezterm.config_builder()
