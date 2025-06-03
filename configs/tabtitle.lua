@@ -30,7 +30,7 @@ end
 function module.apply_to_config(config)
 	wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
 		local title = tab_title(tab)
-		return tab.tab_index .. ": " .. title
+		return tab.tab_index + 1 .. ": " .. title
 	end)
 end
 
