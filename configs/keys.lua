@@ -22,8 +22,12 @@ local ToggleTerminalAction = wezterm.action_callback(function(_, pane)
 end)
 
 local RenameTabAction = act.PromptInputLine({
-	description = "Enter new name for tab",
-	initial_value = "My Tab Name",
+	description = wezterm.format({
+		{ Attribute = { Intensity = "Bold" } },
+		{ Foreground = { AnsiColor = "Aqua" } },
+		{ Text = "Enter new name for tab" },
+	}),
+	initial_value = "🚀 ",
 	action = wezterm.action_callback(function(window, pane, line)
 		-- line will be `nil` if they hit escape without entering anything
 		-- An empty string if they just hit enter
@@ -34,23 +38,18 @@ local RenameTabAction = act.PromptInputLine({
 	end),
 })
 
-local NewWorkspaceAction = act.PromptInputLine({
+local RenameWorkspaceAction = act.PromptInputLine({
 	description = wezterm.format({
 		{ Attribute = { Intensity = "Bold" } },
-		{ Foreground = { AnsiColor = "Fuchsia" } },
-		{ Text = "Enter name for new workspace" },
+		{ Foreground = { AnsiColor = "Aqua" } },
+		{ Text = "Enter new name for workspace" },
 	}),
 	action = wezterm.action_callback(function(window, pane, line)
 		-- line will be `nil` if they hit escape without entering anything
 		-- An empty string if they just hit enter
 		-- Or the actual line of text they wrote
 		if line then
-			window:perform_action(
-				act.SwitchToWorkspace({
-					name = line,
-				}),
-				pane
-			)
+			wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
 		end
 	end),
 })
@@ -63,6 +62,18 @@ function module.apply_to_config(config)
 		key = "Insert",
 		mods = "",
 		timeout_milliseconds = 5000,
+	}
+
+	config.key_tables = {
+		rename_mode = {
+			{ key = "r", mods = "ALT", action = RenameTabAction },
+			{ key = "r", action = RenameTabAction },
+			{ key = "t", action = RenameTabAction },
+			{ key = "w", action = RenameWorkspaceAction },
+
+			-- Cancel the mode by pressing escape
+			{ key = "Escape", action = "PopKeyTable" },
+		},
 	}
 
 	config.keys = {
@@ -167,7 +178,10 @@ function module.apply_to_config(config)
 		{
 			key = "r",
 			mods = "LEADER",
-			action = RenameTabAction,
+			action = act.ActivateKeyTable({
+				name = "rename_mode",
+				timeout_milliseconds = 5000,
+			}),
 		},
 		{
 			key = "z",
@@ -180,18 +194,28 @@ function module.apply_to_config(config)
 			action = ToggleTerminalAction,
 		},
 		{
+			key = "o",
+			mods = "ALT",
+			action = act.ActivateTabRelative(-1),
+		},
+		{
+			key = "u",
+			mods = "ALT",
+			action = act.ActivateTabRelative(1),
+		},
+		{
 			key = "PageDown",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.ActivateTabRelative(-1),
 		},
 		{
 			key = "PageUp",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.ActivateTabRelative(1),
 		},
 		{
 			key = "p",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.ActivateCommandPalette,
 		},
 		{
@@ -200,39 +224,39 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "c",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.ActivateCopyMode,
 			-- See Copy Mode: https://wezterm.org/copymode.html
 		},
 		{
 			key = "s",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.QuickSelect,
 		},
 		{
 			key = "/",
-			mods = "CTRL|ALT",
-			action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+			mods = "ALT",
+			action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
 		},
 		{
 			key = ".",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.SwitchWorkspaceRelative(1),
 		},
 		{
 			key = ",",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.SwitchWorkspaceRelative(-1),
 		},
 		{
 			key = "w",
-			mods = "CTRL|ALT|SHIFT",
-			action = act.CloseCurrentTab({ confirm = false }),
+			mods = "ALT",
+			action = act.CloseCurrentPane({ confirm = false }),
 		},
 		{
-			key = "w",
-			mods = "CTRL|ALT",
-			action = act.CloseCurrentPane({ confirm = false }),
+			key = "W",
+			mods = "CTRL|ALT|SHIFT",
+			action = act.CloseCurrentTab({ confirm = false }),
 		},
 		{
 			key = "F4",
@@ -241,7 +265,7 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "f",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.Search({ CaseSensitiveString = "" }),
 		},
 		{
@@ -251,12 +275,12 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "t",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
 		},
 		{
 			key = "UpArrow",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|ALT|SHIFT",
 			action = wezterm.action.SplitPane({
 				direction = "Up",
 				size = { Percent = 70 },
@@ -264,7 +288,7 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "RightArrow",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|ALT|SHIFT",
 			action = wezterm.action.SplitPane({
 				direction = "Right",
 				size = { Percent = 30 },
@@ -272,7 +296,7 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "DownArrow",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|ALT|SHIFT",
 			action = wezterm.action.SplitPane({
 				direction = "Down",
 				size = { Percent = 30 },
@@ -280,7 +304,7 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "LeftArrow",
-			mods = "CTRL|SHIFT|ALT",
+			mods = "CTRL|ALT|SHIFT",
 			action = wezterm.action.SplitPane({
 				direction = "Left",
 				size = { Percent = 70 },
@@ -288,22 +312,30 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "r",
-			mods = "CTRL|ALT",
-			action = RenameTabAction,
+			mods = "ALT",
+			action = act.ActivateKeyTable({
+				name = "rename_mode",
+				timeout_milliseconds = 5000,
+			}),
 		},
 		{
 			key = "z",
-			mods = "CTRL|ALT",
+			mods = "ALT",
 			action = wezterm.action.TogglePaneZoomState,
 		},
 		{
 			key = ";",
-			mods = "CTRL|ALT",
+			mods = "CTRL|ALT|SHIFT",
 			action = ToggleTerminalAction,
 		},
 		{
 			key = ";",
 			mods = "CTRL",
+			action = ToggleTerminalAction,
+		},
+		{
+			key = ";",
+			mods = "ALT",
 			action = ToggleTerminalAction,
 		},
 	}
@@ -313,6 +345,13 @@ function module.apply_to_config(config)
 		table.insert(config.keys, {
 			key = tostring(i),
 			mods = "LEADER",
+			action = wezterm.action.ActivateTab(i - 1),
+		})
+
+		-- ALT + number to activate that tab
+		table.insert(config.keys, {
+			key = tostring(i),
+			mods = "ALT",
 			action = wezterm.action.ActivateTab(i - 1),
 		})
 	end

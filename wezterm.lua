@@ -1,5 +1,7 @@
 local wezterm = require("wezterm")
 
+require("configs.status-bar")
+
 local config = wezterm.config_builder()
 
 require("configs.multiplexer").apply_to_config(config)

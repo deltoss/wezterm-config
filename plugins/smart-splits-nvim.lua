@@ -13,8 +13,8 @@ function module.apply_to_config(config)
 		direction_keys = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
 		-- modifier keys to combine with direction_keys
 		modifiers = {
-			move = "CTRL|META", -- modifier to use for pane movement, e.g. CTRL+h to move left
-			resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
+			move = "META", -- modifier to use for pane movement, e.g. META+h to move left
+			resize = "CTRL|META", -- modifier to use for pane resize, e.g. CTRL+META+h to resize to the left
 		},
 		-- log level to use: info, warn, error
 		log_level = "info",
