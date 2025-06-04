@@ -16,7 +16,7 @@ function module.apply_to_config(config)
 
 		-- The overall background color of the tab bar when
 		-- the window is not focused
-		inactive_titlebar_bg = "#333333",
+		inactive_titlebar_bg = "#152238",
 
 		-- The size of the font in the tab bar.
 		-- Default to 10.0 on Windows but 12.0 on other systems
