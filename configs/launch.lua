@@ -35,6 +35,18 @@ function module.apply_to_config(config)
 				"LazyDocker",
 			},
 		},
+		{
+			label = "Neovim: Note Taking",
+			args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
+		},
+		{
+			label = "Neovim: Neovim Configs",
+			args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Local\\nvim"); nvim .' },
+		},
+		{
+			label = "Neovim: Wezterm Configs",
+			args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\wezterm"); nvim .' },
+		},
 	}
 end
 
