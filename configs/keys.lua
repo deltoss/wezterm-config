@@ -78,6 +78,18 @@ function module.apply_to_config(config)
 
 	config.keys = {
 		{
+			-- Send proper sequence vim expects
+			-- See: https://stackoverflow.com/a/42461580
+			key = "Enter",
+			mods = "SHIFT",
+			action = wezterm.action.SendString("\x1b[13;2u"),
+		},
+		{
+			key = "Enter",
+			mods = "CTRL",
+			action = wezterm.action.SendString("\x1b[13;5u"),
+		},
+		{
 			key = "o",
 			mods = "LEADER",
 			action = act.ActivateTabRelative(-1),
