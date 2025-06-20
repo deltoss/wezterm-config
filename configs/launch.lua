@@ -18,10 +18,8 @@ function module.apply_to_config(config)
 			},
 		},
 		{
-			label = "lf",
-			args = {
-				"lf",
-			},
+			label = "Yazi",
+			args = { "pwsh", "-NoExit", "-NoLogo", "-c", "y" },
 		},
 		{
 			label = "LazyGit",
@@ -46,6 +44,10 @@ function module.apply_to_config(config)
 		{
 			label = "Neovim: Wezterm Configs",
 			args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\wezterm"); nvim .' },
+		},
+		{
+			label = "Neovim: Powershell Profile",
+			args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "nvim $PROFILE.CurrentUserAllHosts" },
 		},
 	}
 end
