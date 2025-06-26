@@ -16,18 +16,6 @@ function module.apply_to_config(config)
 		timeout_milliseconds = 5000,
 	}
 
-	config.key_tables = {
-		rename_mode = {
-			{ key = "r", mods = "ALT", action = renameUtils.renameTabAction },
-			{ key = "r", action = renameUtils.renameTabAction },
-			{ key = "t", action = renameUtils.renameTabAction },
-			{ key = "w", action = renameUtils.renameWorkspaceAction },
-
-			-- Cancel the mode by pressing escape
-			{ key = "Escape", action = "PopKeyTable" },
-		},
-	}
-
 	config.keys = {
 		{
 			-- Send proper sequence vim expects
@@ -142,10 +130,7 @@ function module.apply_to_config(config)
 		{
 			key = "r",
 			mods = "LEADER",
-			action = act.ActivateKeyTable({
-				name = "rename_mode",
-				timeout_milliseconds = 5000,
-			}),
+			action = renameUtils.promptRenameAction,
 		},
 		{
 			key = "z",
@@ -307,10 +292,7 @@ function module.apply_to_config(config)
 		{
 			key = "r",
 			mods = "ALT",
-			action = act.ActivateKeyTable({
-				name = "rename_mode",
-				timeout_milliseconds = 5000,
-			}),
+			action = renameUtils.promptRenameAction,
 		},
 		{
 			key = "z",
