@@ -226,6 +226,36 @@ function module.apply_to_config(config)
 			action = act.ActivateTabRelative(1),
 		},
 		{
+			key = "{",
+			mods = "SHIFT|ALT",
+			action = act.MoveTabRelative(-1),
+		},
+		{
+			key = "}",
+			mods = "SHIFT|ALT",
+			action = act.MoveTabRelative(1),
+		},
+		{
+			key = "o",
+			mods = "ALT|CTRL",
+			action = act.MoveTabRelative(-1),
+		},
+		{
+			key = "u",
+			mods = "ALT|CTRL",
+			action = act.MoveTabRelative(1),
+		},
+		{
+			key = "PageDown",
+			mods = "ALT|CTRL",
+			action = act.MoveTabRelative(-1),
+		},
+		{
+			key = "PageUp",
+			mods = "ALT|CTRL",
+			action = act.MoveTabRelative(1),
+		},
+		{
 			key = "p",
 			mods = "ALT",
 			action = act.ActivateCommandPalette,
