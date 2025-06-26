@@ -1,58 +1,10 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 
+local renameUtils = require("utils.rename")
+local terminalUtils = require("utils.terminal")
+
 local module = {}
-
--- Based on: https://github.com/wezterm/wezterm/discussions/3779#discussioncomment-8923369
-local ToggleTerminalAction = wezterm.action_callback(function(_, pane)
-	local tab = pane:tab()
-	local panes = tab:panes_with_info()
-	if #panes == 1 then
-		pane:split({
-			direction = "Bottom",
-			size = 0.4,
-		})
-	elseif not panes[1].is_zoomed then
-		panes[1].pane:activate()
-		tab:set_zoomed(true)
-	elseif panes[1].is_zoomed then
-		tab:set_zoomed(false)
-		panes[2].pane:activate()
-	end
-end)
-
-local RenameTabAction = act.PromptInputLine({
-	description = wezterm.format({
-		{ Attribute = { Intensity = "Bold" } },
-		{ Foreground = { AnsiColor = "Aqua" } },
-		{ Text = "Enter new name for tab" },
-	}),
-	initial_value = "🚀 ",
-	action = wezterm.action_callback(function(window, pane, line)
-		-- line will be `nil` if they hit escape without entering anything
-		-- An empty string if they just hit enter
-		-- Or the actual line of text they wrote
-		if line then
-			window:active_tab():set_title(line)
-		end
-	end),
-})
-
-local RenameWorkspaceAction = act.PromptInputLine({
-	description = wezterm.format({
-		{ Attribute = { Intensity = "Bold" } },
-		{ Foreground = { AnsiColor = "Aqua" } },
-		{ Text = "Enter new name for workspace" },
-	}),
-	action = wezterm.action_callback(function(window, pane, line)
-		-- line will be `nil` if they hit escape without entering anything
-		-- An empty string if they just hit enter
-		-- Or the actual line of text they wrote
-		if line then
-			wezterm.mux.rename_workspace(wezterm.mux.get_active_workspace(), line)
-		end
-	end),
-})
 
 -- The suggested convention for making modules that update
 -- the config is for them to export an `apply_to_config`
@@ -66,10 +18,10 @@ function module.apply_to_config(config)
 
 	config.key_tables = {
 		rename_mode = {
-			{ key = "r", mods = "ALT", action = RenameTabAction },
-			{ key = "r", action = RenameTabAction },
-			{ key = "t", action = RenameTabAction },
-			{ key = "w", action = RenameWorkspaceAction },
+			{ key = "r", mods = "ALT", action = renameUtils.renameTabAction },
+			{ key = "r", action = renameUtils.renameTabAction },
+			{ key = "t", action = renameUtils.renameTabAction },
+			{ key = "w", action = renameUtils.renameWorkspaceAction },
 
 			-- Cancel the mode by pressing escape
 			{ key = "Escape", action = "PopKeyTable" },
@@ -203,7 +155,7 @@ function module.apply_to_config(config)
 		{
 			key = ";",
 			mods = "LEADER",
-			action = ToggleTerminalAction,
+			action = terminalUtils.toggleTerminalAction,
 		},
 		{
 			key = "o",
@@ -368,17 +320,17 @@ function module.apply_to_config(config)
 		{
 			key = ";",
 			mods = "CTRL|ALT|SHIFT",
-			action = ToggleTerminalAction,
+			action = terminalUtils.toggleTerminalAction,
 		},
 		{
 			key = ";",
 			mods = "CTRL",
-			action = ToggleTerminalAction,
+			action = terminalUtils.toggleTerminalAction,
 		},
 		{
 			key = ";",
 			mods = "ALT",
-			action = ToggleTerminalAction,
+			action = terminalUtils.toggleTerminalAction,
 		},
 	}
 
