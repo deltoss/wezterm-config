@@ -1,7 +1,5 @@
 local wezterm = require("wezterm")
 
-local module = {}
-
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
@@ -24,14 +22,11 @@ function tab_title(tab_info)
 	return basename(tab_info.active_pane.title)
 end
 
--- The suggested convention for making modules that update
--- the config is for them to export an `apply_to_config`
--- function that accepts the config object.
-function module.apply_to_config(config)
-	wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
-		local title = tab_title(tab)
-		return tab.tab_index + 1 .. ": " .. title
-	end)
-end
+wezterm.on("format-tab-title", function(tab, tabs, panes, config, hover, max_width)
+	local title = tab_title(tab)
+	return tab.tab_index + 1 .. ": " .. title
+end)
 
-return module
+return {
+	apply_to_config = function(config) end,
+}
