@@ -5,6 +5,8 @@ local module = {}
 -- the config is for them to export an `apply_to_config`
 -- function that accepts the config object.
 function module.apply_to_config(config)
+	config.initial_cols = 140
+
 	config.font_size = 15
 	-- See: https://wezterm.org/colorschemes/index.html
 	config.color_scheme = "Catppuccin Latte"
