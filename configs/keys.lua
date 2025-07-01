@@ -17,6 +17,9 @@ function module.apply_to_config(config)
 	}
 
 	config.keys = {
+		-- Turn off problematic default key bindings
+		{ key = "PageUp", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+		{ key = "PageDown", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 		{
 			-- Send proper sequence vim expects
 			-- See: https://stackoverflow.com/a/42461580
