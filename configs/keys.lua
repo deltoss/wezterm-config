@@ -236,11 +236,6 @@ function module.apply_to_config(config)
 			action = act.CloseCurrentPane({ confirm = false }),
 		},
 		{
-			key = "W",
-			mods = "CTRL|ALT|SHIFT",
-			action = act.CloseCurrentTab({ confirm = false }),
-		},
-		{
 			key = "F4",
 			mods = "CTRL",
 			action = act.CloseCurrentTab({ confirm = false }),
@@ -252,45 +247,13 @@ function module.apply_to_config(config)
 		},
 		{
 			key = "T",
-			mods = "CTRL|ALT|SHIFT",
+			mods = "ALT|SHIFT",
 			action = act.ShowTabNavigator,
 		},
 		{
 			key = "t",
 			mods = "ALT",
 			action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
-		},
-		{
-			key = "UpArrow",
-			mods = "CTRL|ALT|SHIFT",
-			action = wezterm.action.SplitPane({
-				direction = "Up",
-				size = { Percent = 70 },
-			}),
-		},
-		{
-			key = "RightArrow",
-			mods = "CTRL|ALT|SHIFT",
-			action = wezterm.action.SplitPane({
-				direction = "Right",
-				size = { Percent = 30 },
-			}),
-		},
-		{
-			key = "DownArrow",
-			mods = "CTRL|ALT|SHIFT",
-			action = wezterm.action.SplitPane({
-				direction = "Down",
-				size = { Percent = 30 },
-			}),
-		},
-		{
-			key = "LeftArrow",
-			mods = "CTRL|ALT|SHIFT",
-			action = wezterm.action.SplitPane({
-				direction = "Left",
-				size = { Percent = 70 },
-			}),
 		},
 		{
 			key = "r",
@@ -301,11 +264,6 @@ function module.apply_to_config(config)
 			key = "z",
 			mods = "ALT",
 			action = wezterm.action.TogglePaneZoomState,
-		},
-		{
-			key = ";",
-			mods = "CTRL|ALT|SHIFT",
-			action = terminalUtils.toggleTerminalAction,
 		},
 		{
 			key = ";",
