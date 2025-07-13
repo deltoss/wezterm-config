@@ -7,7 +7,7 @@ local module = {}
 function module.apply_to_config(config)
 	config.initial_cols = 140
 
-	config.font_size = 15
+	config.font_size = 14
 	-- See: https://wezterm.org/colorschemes/index.html
 	config.color_scheme = "Catppuccin Latte"
 
