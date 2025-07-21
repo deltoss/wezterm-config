@@ -16,7 +16,7 @@ function module.apply_to_config(config)
 			},
 			{
 				label = "Admin Shell",
-				args = { "pwsh", "-NoProfile", "-NoExit", "-NoLogo", "-c", "gsudo" },
+				args = { "pwsh", "-NoProfile", "-NoLogo", "-c", "gsudo" },
 			},
 			{
 				label = "Neovim",
