@@ -46,7 +46,7 @@ function module.apply_to_config(config)
 			},
 			{
 				label = "Neovim: Neovim Configs",
-				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Local\\nvim"); nvim .' },
+				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\nvim"); nvim .' },
 			},
 			{
 				label = "Neovim: Wezterm Configs",
