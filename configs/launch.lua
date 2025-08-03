@@ -54,7 +54,7 @@ function module.apply_to_config(config)
 			},
 			{
 				label = "Neovim: Powershell Profile",
-				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "nvim $PROFILE.CurrentUserAllHosts" },
+				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\PowerShell"); nvim .' },
 			},
 		}
 	end
