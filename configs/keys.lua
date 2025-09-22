@@ -18,6 +18,7 @@ function module.apply_to_config(config)
 
 	config.keys = {
 		-- Turn off problematic default key bindings
+		{ key = "p", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "PageUp", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 		{ key = "PageDown", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
 		{
