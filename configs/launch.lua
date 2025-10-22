@@ -29,18 +29,6 @@ function module.apply_to_config(config)
 				args = { "pwsh", "-NoExit", "-NoLogo", "-c", "y" },
 			},
 			{
-				label = "LazyGit",
-				args = {
-					"LazyGit",
-				},
-			},
-			{
-				label = "LazyDocker",
-				args = {
-					"LazyDocker",
-				},
-			},
-			{
 				label = "Neovim: Note Taking",
 				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
 			},
@@ -55,6 +43,10 @@ function module.apply_to_config(config)
 			{
 				label = "Neovim: Powershell Profile",
 				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\PowerShell"); nvim .' },
+			},
+			{
+				label = "Neovim: Chezmoi",
+				args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "cd (chezmoi source-path); nvim ." },
 			},
 		}
 	end
