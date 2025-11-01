@@ -130,6 +130,11 @@ function module.apply_to_config(config)
 			action = wezterm.action.TogglePaneZoomState,
 		},
 		{
+			key = "i",
+			mods = "LEADER",
+			action = terminalUtils.toggleTerminalAction,
+		},
+		{
 			key = ";",
 			mods = "LEADER",
 			action = terminalUtils.toggleTerminalAction,
@@ -255,8 +260,8 @@ function module.apply_to_config(config)
 			action = wezterm.action.TogglePaneZoomState,
 		},
 		{
-			key = ";",
-			mods = "CTRL",
+			key = "i",
+			mods = "ALT",
 			action = terminalUtils.toggleTerminalAction,
 		},
 		{
