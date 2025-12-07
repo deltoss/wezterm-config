@@ -8,17 +8,17 @@ local module = {}
 -- the config is for them to export an `apply_to_config`
 -- function that accepts the config object.
 function module.apply_to_config(config)
-	smart_splits.apply_to_config(config, {
-		-- directional keys to use in order of: left, down, up, right
-		direction_keys = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
-		-- modifier keys to combine with direction_keys
-		modifiers = {
-			move = "META", -- modifier to use for pane movement, e.g. META+h to move left
-			resize = "CTRL|META", -- modifier to use for pane resize, e.g. CTRL+META+h to resize to the left
-		},
-		-- log level to use: info, warn, error
-		log_level = "info",
-	})
+  smart_splits.apply_to_config(config, {
+    -- directional keys to use in order of: left, down, up, right
+    direction_keys = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
+    -- modifier keys to combine with direction_keys
+    modifiers = {
+      move = "META", -- modifier to use for pane movement, e.g. META+h to move left
+      resize = "CTRL|META", -- modifier to use for pane resize, e.g. CTRL+META+h to resize to the left
+    },
+    -- log level to use: info, warn, error
+    log_level = "warn",
+  })
 end
 
 return module
