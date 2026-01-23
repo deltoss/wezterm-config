@@ -53,8 +53,12 @@ function module.apply_to_config(config)
         args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\PowerShell"); nvim .' },
       },
       {
-        label = "Neovim: Chezmoi",
+        label = "Neovim: Chezmoi - Personal/Work",
         args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "cd (chezmoi source-path); nvim ." },
+      },
+      {
+        label = "Neovim: Chezmoi - Servers",
+        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "serversdotfiles"); nvim .' },
       },
     }
   end
