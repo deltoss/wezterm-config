@@ -53,6 +53,10 @@ function module.apply_to_config(config)
         args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\PowerShell"); nvim .' },
       },
       {
+        label = "Neovim: Nushell Configs",
+        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config nushell); nvim ." },
+      },
+      {
         label = "Neovim: Chezmoi - Personal/Work",
         args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "cd (chezmoi source-path); nvim ." },
       },
