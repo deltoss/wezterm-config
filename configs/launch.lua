@@ -7,7 +7,7 @@ local module = {}
 -- function that accepts the config object.
 function module.apply_to_config(config)
   if wezterm.target_triple == "x86_64-pc-windows-msvc" then
-    config.default_prog = { "pwsh", "-NoLogo" }
+    config.default_prog = { "nu" }
 
     config.launch_menu = {
       {
@@ -15,12 +15,16 @@ function module.apply_to_config(config)
         args = {},
       },
       {
-        label = "NuShell",
-        args = { "nu" },
+        label = "PowerShell",
+        args = { "pwsh", "-NoLogo" },
       },
       {
-        label = "Admin Shell",
+        label = "Admin PowerShell",
         args = { "pwsh", "-NoProfile", "-NoLogo", "-c", "gsudo" },
+      },
+      {
+        label = "Admin Nushell",
+        args = { "nu", "--no-config-file", "-c", "gsudo" },
       },
       {
         label = "Neovim",
@@ -34,23 +38,23 @@ function module.apply_to_config(config)
       },
       {
         label = "Neovim: Note Taking",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
       },
       {
         label = "Neovim: Org Notes",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "Org Notes"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", 'cd (zoxide query "Org Notes"); nvim .' },
       },
       {
         label = "Neovim: Neovim Configs",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\nvim"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config nvim); nvim ." },
       },
       {
         label = "Neovim: Wezterm Configs",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\wezterm"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config wezterm); nvim ." },
       },
       {
         label = "Neovim: Powershell Profile",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query ".config\\PowerShell"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config PowerShell); nvim ." },
       },
       {
         label = "Neovim: Nushell Configs",
