@@ -62,11 +62,11 @@ function module.apply_to_config(config)
       },
       {
         label = "Neovim: Chezmoi - Personal/Work",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", "cd (chezmoi source-path); nvim ." },
+        args = { "nu", "--no-config-file", "-c", "cd (chezmoi source-path); nvim ." },
       },
       {
         label = "Neovim: Chezmoi - Servers",
-        args = { "pwsh", "-NoLogo", "-NoProfile", "-c", 'cd (zoxide query "serversdotfiles"); nvim .' },
+        args = { "nu", "--no-config-file", "-c", "cd (zoxide query serversdotfiles); nvim ." },
       },
     }
   end
