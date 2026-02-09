@@ -24,7 +24,7 @@ function module.apply_to_config(config)
       },
       {
         label = "Admin Nushell",
-        args = { "nu", "--no-config-file", "-c", "gsudo" },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "gsudo" },
       },
       {
         label = "Neovim",
@@ -34,39 +34,39 @@ function module.apply_to_config(config)
       },
       {
         label = "Yazi",
-        args = { "pwsh", "-NoExit", "-NoLogo", "-c", "y" },
+        args = { "nu", "-e", "y" },
       },
       {
         label = "Neovim: Note Taking",
-        args = { "nu", "--no-config-file", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", 'cd (zoxide query "Note Taking"); nvim .' },
       },
       {
         label = "Neovim: Org Notes",
-        args = { "nu", "--no-config-file", "-c", 'cd (zoxide query "Org Notes"); nvim .' },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", 'cd (zoxide query "Org Notes"); nvim .' },
       },
       {
         label = "Neovim: Neovim Configs",
-        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config nvim); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query .config nvim); nvim ." },
       },
       {
         label = "Neovim: Wezterm Configs",
-        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config wezterm); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query .config wezterm); nvim ." },
       },
       {
         label = "Neovim: Powershell Profile",
-        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config PowerShell); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query .config PowerShell); nvim ." },
       },
       {
         label = "Neovim: Nushell Configs",
-        args = { "nu", "--no-config-file", "-c", "cd (zoxide query .config nushell); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query .config nushell); nvim ." },
       },
       {
         label = "Neovim: Chezmoi - Personal/Work",
-        args = { "nu", "--no-config-file", "-c", "cd (chezmoi source-path); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (chezmoi source-path); nvim ." },
       },
       {
         label = "Neovim: Chezmoi - Servers",
-        args = { "nu", "--no-config-file", "-c", "cd (zoxide query serversdotfiles); nvim ." },
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query serversdotfiles); nvim ." },
       },
     }
   end
