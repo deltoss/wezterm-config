@@ -15,14 +15,6 @@ function module.apply_to_config(config)
         args = {},
       },
       {
-        label = "PowerShell",
-        args = { "pwsh", "-NoLogo" },
-      },
-      {
-        label = "Admin PowerShell",
-        args = { "pwsh", "-NoProfile", "-NoLogo", "-c", "gsudo" },
-      },
-      {
         label = "Admin Nushell",
         args = { "nu", "--no-config-file", "--no-std-lib", "-c", "gsudo" },
       },
@@ -67,6 +59,14 @@ function module.apply_to_config(config)
       {
         label = "Neovim: Chezmoi - Servers",
         args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query serversdotfiles); nvim ." },
+      },
+      {
+        label = "PowerShell",
+        args = { "pwsh", "-NoLogo" },
+      },
+      {
+        label = "Admin PowerShell",
+        args = { "pwsh", "-NoProfile", "-NoLogo", "-c", "gsudo" },
       },
     }
   end
