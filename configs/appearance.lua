@@ -1,8 +1,6 @@
 local wezterm = require("wezterm")
 local module = {}
 
-COLOR_SCHEME = "Catppuccin Latte"
-
 -- The suggested convention for making modules that update
 -- the config is for them to export an `apply_to_config`
 -- function that accepts the config object.
@@ -16,7 +14,7 @@ function module.apply_to_config(config)
   config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
   -- See: https://wezterm.org/colorschemes/index.html
-  config.color_scheme = COLOR_SCHEME
+  config.color_scheme = "Catppuccin Latte"
 
   config.window_frame = {
     -- The overall background color of the tab bar when
@@ -93,32 +91,5 @@ function module.apply_to_config(config)
     },
   }
 end
-
--- For Nushell, you can call this code to change the theme dynamically:
---[[
-def emit-user-var [name: string, value: string = ""] {
-  let encoded_value = $value | encode base64
-  print -n $"\u{1b}]1337;SetUserVar=($name)=($encoded_value)\u{07}"
-}
-]]
-
---[[ For Debugging purposes
--- Alt+P > Show Debug Overlay
-wezterm.on("user-var-changed", function(window, pane, name, value)
-  wezterm.log_info("user-var-changed", name, value)
-end)
-]]
-
-wezterm.on("update-status", function(window, pane)
-  local user_vars = pane:get_user_vars()
-  local theme_user_var = pane:get_user_vars().THEME
-  wezterm.log_info("update-status", theme_user_var, user_vars)
-  local theme = (theme_user_var ~= "" and theme_user_var) or nil
-  if theme then
-    local overrides = window:get_config_overrides() or {}
-    overrides.color_scheme = theme
-    window:set_config_overrides(overrides)
-  end
-end)
 
 return module
