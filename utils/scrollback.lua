@@ -3,6 +3,7 @@ local io = require("io")
 local os = require("os")
 local act = wezterm.action
 
+-- See https://wezterm.org/config/lua/pane/get_lines_as_text.html
 wezterm.on("trigger-editor-with-scrollback", function(window, pane)
   local editor = os.getenv("EDITOR") or "vim"
   --
