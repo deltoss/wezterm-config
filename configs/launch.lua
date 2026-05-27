@@ -61,6 +61,10 @@ function module.apply_to_config(config)
         args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd (zoxide query serversdotfiles); nvim ." },
       },
       {
+        label = "Neovim: HTTP Requests",
+        args = { "nu", "--no-config-file", "--no-std-lib", "-c", "cd ~/HTTP; nvim ." },
+      },
+      {
         label = "PowerShell",
         args = { "pwsh", "-NoLogo" },
       },
