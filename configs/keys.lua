@@ -19,9 +19,9 @@ function module.apply_to_config(config)
 
   config.keys = {
     -- Turn off problematic default key bindings
-    { key = "p",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "PageUp",   mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
-    { key = "PageDown", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+    { key = "p", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "PageUp", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+    { key = "PageDown", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
     {
       key = "o",
       mods = "CTRL|SHIFT",
@@ -86,12 +86,12 @@ function module.apply_to_config(config)
     {
       key = "t",
       mods = "LEADER",
-      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
+      action = act.SpawnTab("CurrentPaneDomain"),
     },
     {
       key = "T",
       mods = "LEADER|SHIFT",
-      action = act.ShowTabNavigator,
+      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
     },
     {
       key = "UpArrow",
@@ -248,12 +248,12 @@ function module.apply_to_config(config)
     {
       key = "T",
       mods = "ALT|SHIFT",
-      action = act.ShowTabNavigator,
+      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
     },
     {
       key = "t",
       mods = "ALT",
-      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
+      action = act.SpawnTab("CurrentPaneDomain"),
     },
     {
       key = "r",
