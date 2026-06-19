@@ -10,10 +10,20 @@ function module.apply_to_config(config)
     local xdg = os.getenv("XDG_CONFIG_HOME")
     if xdg then
       config.default_prog = { "zellij", "--config-dir", xdg .. "/zellij", "--layout", "quick-launch" }
-      return
+    else
+      config.default_prog = { "zellij" }
     end
   end
-  config.default_prog = { "zellij" }
+  config.launch_menu = {
+    {
+      label = "Default Shell",
+      args = { "nu" },
+    },
+    {
+      label = "Zellij",
+      args = {},
+    },
+  }
 end
 
 return module

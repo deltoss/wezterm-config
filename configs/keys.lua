@@ -246,8 +246,8 @@ function module.apply_to_config(config)
       action = act.Search({ CaseSensitiveString = "" }),
     },
     {
-      key = "T",
-      mods = "ALT|SHIFT",
+      key = "t",
+      mods = "CTRL|ALT",
       action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
     },
     {
