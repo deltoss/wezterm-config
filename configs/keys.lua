@@ -156,42 +156,12 @@ function module.apply_to_config(config)
       action = act.ActivateTabRelative(1),
     },
     {
-      key = "PageDown",
-      mods = "ALT",
-      action = act.ActivateTabRelative(-1),
-    },
-    {
-      key = "PageUp",
-      mods = "ALT",
-      action = act.ActivateTabRelative(1),
-    },
-    {
-      key = "{",
-      mods = "SHIFT|ALT",
-      action = act.MoveTabRelative(-1),
-    },
-    {
-      key = "}",
-      mods = "SHIFT|ALT",
-      action = act.MoveTabRelative(1),
-    },
-    {
       key = "o",
       mods = "ALT|CTRL",
       action = act.MoveTabRelative(-1),
     },
     {
       key = "u",
-      mods = "ALT|CTRL",
-      action = act.MoveTabRelative(1),
-    },
-    {
-      key = "PageDown",
-      mods = "ALT|CTRL",
-      action = act.MoveTabRelative(-1),
-    },
-    {
-      key = "PageUp",
       mods = "ALT|CTRL",
       action = act.MoveTabRelative(1),
     },
@@ -209,61 +179,6 @@ function module.apply_to_config(config)
       mods = "ALT",
       action = act.ActivateCopyMode,
       -- See Copy Mode: https://wezterm.org/copymode.html
-    },
-    {
-      key = "s",
-      mods = "ALT",
-      action = act.QuickSelect,
-    },
-    {
-      key = "/",
-      mods = "ALT",
-      action = act.ShowLauncherArgs({ flags = "WORKSPACES" }),
-    },
-    {
-      key = ".",
-      mods = "ALT",
-      action = act.SwitchWorkspaceRelative(1),
-    },
-    {
-      key = ",",
-      mods = "ALT",
-      action = act.SwitchWorkspaceRelative(-1),
-    },
-    {
-      key = "w",
-      mods = "ALT",
-      action = act.CloseCurrentPane({ confirm = false }),
-    },
-    {
-      key = "F4",
-      mods = "CTRL",
-      action = act.CloseCurrentTab({ confirm = false }),
-    },
-    {
-      key = "f",
-      mods = "ALT",
-      action = act.Search({ CaseSensitiveString = "" }),
-    },
-    {
-      key = "t",
-      mods = "CTRL|ALT",
-      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
-    },
-    {
-      key = "t",
-      mods = "ALT",
-      action = act.SpawnTab("CurrentPaneDomain"),
-    },
-    {
-      key = "r",
-      mods = "ALT",
-      action = renameUtils.promptRenameAction,
-    },
-    {
-      key = "z",
-      mods = "ALT",
-      action = wezterm.action.TogglePaneZoomState,
     },
     {
       key = "i",
