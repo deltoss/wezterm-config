@@ -146,22 +146,22 @@ function module.apply_to_config(config)
       action = terminalUtils.toggleTerminalAction,
     },
     {
-      key = "o",
+      key = ",",
       mods = "ALT",
       action = act.ActivateTabRelative(-1),
     },
     {
-      key = "u",
+      key = ".",
       mods = "ALT",
       action = act.ActivateTabRelative(1),
     },
     {
-      key = "o",
+      key = ",",
       mods = "ALT|CTRL",
       action = act.MoveTabRelative(-1),
     },
     {
-      key = "u",
+      key = ".",
       mods = "ALT|CTRL",
       action = act.MoveTabRelative(1),
     },
