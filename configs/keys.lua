@@ -19,9 +19,9 @@ function module.apply_to_config(config)
 
   config.keys = {
     -- Turn off problematic default key bindings
-    { key = "p", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "PageUp", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
-    { key = "PageDown", mods = "CTRL", action = wezterm.action.DisableDefaultAssignment },
+    { key = "p",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "PageUp",   mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+    { key = "PageDown", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     {
       key = "o",
       mods = "CTRL|SHIFT",
@@ -34,6 +34,16 @@ function module.apply_to_config(config)
     },
     {
       key = "u",
+      mods = "LEADER",
+      action = act.ActivateTabRelative(1),
+    },
+    {
+      key = ",",
+      mods = "LEADER",
+      action = act.ActivateTabRelative(-1),
+    },
+    {
+      key = ".",
       mods = "LEADER",
       action = act.ActivateTabRelative(1),
     },
@@ -59,16 +69,6 @@ function module.apply_to_config(config)
       action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
     },
     {
-      key = ".",
-      mods = "LEADER",
-      action = act.SwitchWorkspaceRelative(1),
-    },
-    {
-      key = ",",
-      mods = "LEADER",
-      action = act.SwitchWorkspaceRelative(-1),
-    },
-    {
       key = "w",
       mods = "LEADER",
       action = act.CloseCurrentPane({ confirm = false }),
@@ -91,7 +91,7 @@ function module.apply_to_config(config)
     {
       key = "T",
       mods = "LEADER|SHIFT",
-      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS|WORKSPACES" }),
+      action = act.ShowLauncherArgs({ flags = "LAUNCH_MENU_ITEMS|TABS" }),
     },
     {
       key = "UpArrow",
