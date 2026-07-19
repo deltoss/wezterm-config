@@ -5,7 +5,7 @@ local act = wezterm.action
 
 -- See https://wezterm.org/config/lua/pane/get_lines_as_text.html
 wezterm.on("trigger-editor-with-scrollback", function(window, pane)
-  local editor = os.getenv("EDITOR") or "vim"
+  local editor = os.getenv("EDITOR") or "nvim"
   --
   -- Retrieve the text from the pane
   local text = pane:get_lines_as_text(pane:get_dimensions().scrollback_rows)
