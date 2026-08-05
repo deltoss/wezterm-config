@@ -81,7 +81,7 @@ wezterm.on("update-right-status", function(window, pane)
 	local num_cells = 0
 
 	-- Translate a cell into elements
-	function push(text, is_last)
+	local function push(text, is_last)
 		local cell_no = num_cells + 1
 
 		table.insert(elements, { Foreground = { Color = text_fg } })

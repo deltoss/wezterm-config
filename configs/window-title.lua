@@ -1,8 +1,8 @@
 local wezterm = require("wezterm")
 
-wezterm.on("format-window-title", function()
+wezterm.on("format-window-title", function(tab, pane)
   local title = wezterm.mux.get_active_workspace()
-  title = title .. " → Domain: " .. wezterm.mux.get_domain():name()
+  title = title .. " → Domain: " .. pane.domain_name
   return title
 end)
 
