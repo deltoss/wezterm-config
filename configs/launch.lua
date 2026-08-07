@@ -21,7 +21,7 @@ function module.apply_to_config(config)
     },
     {
       label = "Zellij",
-      args = {},
+      args = { "zellij" },
     },
   }
 end

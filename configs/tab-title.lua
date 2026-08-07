@@ -3,7 +3,7 @@ local wezterm = require("wezterm")
 -- Equivalent to POSIX basename(3)
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
-function basename(s)
+local function basename(s)
   return string.gsub(s, "(.*[/\\])(.*)(%..*)", "%2")
 end
 
@@ -11,7 +11,7 @@ end
 -- It prefers the title that was set via `tab:set_title()`
 -- or `wezterm cli set-tab-title`, but falls back to the
 -- title of the active pane in that tab.
-function tab_title(tab_info)
+local function tab_title(tab_info)
   local title = tab_info.tab_title
   local tabNumber = tab_info.tab_index + 1
   -- if the tab title is explicitly set, take that
