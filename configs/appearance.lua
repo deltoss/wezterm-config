@@ -5,11 +5,13 @@ local module = {}
 -- the config is for them to export an `apply_to_config`
 -- function that accepts the config object.
 function module.apply_to_config(config)
+  local font_size = 22
+
   config.initial_cols = 140
 
   config.warn_about_missing_glyphs = false
 
-  config.font_size = 14
+  config.font_size = font_size
   -- See https://wezterm.org/config/font-shaping.html#advanced-font-shaping-options
   config.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
 
@@ -27,7 +29,7 @@ function module.apply_to_config(config)
 
     -- The size of the font in the tab bar.
     -- Default to 10.0 on Windows but 12.0 on other systems
-    font_size = 14.0,
+    font_size = font_size,
   }
 
   config.window_padding = {
