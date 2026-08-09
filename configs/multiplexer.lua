@@ -1,4 +1,22 @@
+local wezterm = require("wezterm")
+local mux = wezterm.mux
+
 local module = {}
+
+-- Maximize/restore round trip on reattach: forces a window state change and
+-- repaint, clearing stale content when the compositor resizes after first paint.
+wezterm.on("gui-attached", function()
+	local workspace = mux.get_active_workspace()
+	for _, window in ipairs(mux.all_windows()) do
+		if window:get_workspace() == workspace then
+			local gui_window = window:gui_window()
+			gui_window:maximize()
+			wezterm.time.call_after(0.3, function()
+				gui_window:restore()
+			end)
+		end
+	end
+end)
 
 -- The suggested convention for making modules that update
 -- the config is for them to export an `apply_to_config`
