@@ -7,6 +7,12 @@ local module = {}
 function module.apply_to_config(config)
   local font_size = 22
 
+  -- Force scaling on Windows, to rely on the font size for consistent
+  -- experience across OS
+  if wezterm.target_triple:find("windows") then
+    config.dpi = 96
+  end
+
   config.initial_cols = 140
 
   config.warn_about_missing_glyphs = false
