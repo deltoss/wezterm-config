@@ -1,4 +1,5 @@
 local wezterm = require("wezterm")
+local agent_status = require("configs.agent-status")
 
 local CLOCK_FACES = { "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛" }
 
@@ -7,9 +8,13 @@ local function get_clock_emoji()
   return CLOCK_FACES[hour]
 end
 
-wezterm.on("update-right-status", function(window, pane)
+wezterm.on("update-status", function(window, pane)
   -- Each element holds the text for a cell in a "powerline" style << fade
   local cells = {}
+
+  for _, segment in ipairs(agent_status.render()) do
+    table.insert(cells, segment)
+  end
 
   -- Pick up the hostname for a remote pane when its shell uses OSC 7.
   local cwd_uri = pane:get_current_working_dir()
@@ -74,21 +79,28 @@ wezterm.on("update-right-status", function(window, pane)
   local elements = {}
   -- How many cells have been formatted
   local num_cells = 0
+  local total_cells = #cells
+
+  local function cell_color(cell_no)
+    local distance_from_right = total_cells - cell_no
+    return colors[(distance_from_right % #colors) + 1]
+  end
 
   -- Translate a cell into elements
   local function push(text, is_last)
     local cell_no = num_cells + 1
+    local background = cell_color(cell_no)
 
     if cell_no == 1 then
       table.insert(elements, { Background = { Color = titlebar_bg } })
-      table.insert(elements, { Foreground = { Color = colors[cell_no] } })
+      table.insert(elements, { Foreground = { Color = background } })
       table.insert(elements, { Text = SOLID_LEFT_ARROW })
     end
     table.insert(elements, { Foreground = { Color = text_fg } })
-    table.insert(elements, { Background = { Color = colors[cell_no] } })
+    table.insert(elements, { Background = { Color = background } })
     table.insert(elements, { Text = " " .. text .. " " })
     if not is_last then
-      table.insert(elements, { Foreground = { Color = colors[cell_no + 1] } })
+      table.insert(elements, { Foreground = { Color = cell_color(cell_no + 1) } })
       table.insert(elements, { Text = SOLID_LEFT_ARROW })
     end
     num_cells = num_cells + 1
