@@ -1,7 +1,16 @@
 local wezterm = require("wezterm")
 local agent_status = require("configs.agent-status")
 
-local CLOCK_FACES = { "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛" }
+local CLOCK_FACES = { "🕐", "🕑", "🕒", "🕓", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛" }
+local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+local STATUS_COLORS = {
+  "#174574",
+  "#365473",
+  "#567594",
+  "#5f8fc9",
+  "#537cad",
+}
+local STATUS_TEXT_FG = "#c0c0c0"
 
 local function get_clock_emoji()
   local hour = tonumber(wezterm.strftime("%I"))
@@ -10,11 +19,7 @@ end
 
 wezterm.on("update-status", function(window, pane)
   -- Each element holds the text for a cell in a "powerline" style << fade
-  local cells = {}
-
-  for _, segment in ipairs(agent_status.render()) do
-    table.insert(cells, segment)
-  end
+  local cells = agent_status.render()
 
   -- Pick up the hostname for a remote pane when its shell uses OSC 7.
   local cwd_uri = pane:get_current_working_dir()
@@ -56,39 +61,18 @@ wezterm.on("update-status", function(window, pane)
     table.insert(cells, "Table: " .. name)
   end
 
-  -- The powerline < symbol
-  local LEFT_ARROW = utf8.char(0xe0b3)
-  -- The filled in variant of the < symbol
-  local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
-  -- Color palette for the backgrounds of each cell
-  local colors = {
-    "#174574",
-    "#365473",
-    "#567594",
-    "#5f8fc9",
-    "#537cad",
-  }
   local window_frame = window:effective_config().window_frame
   local titlebar_bg = window:is_focused() and window_frame.active_titlebar_bg or window_frame.inactive_titlebar_bg
 
-  -- Foreground color for the text across the fade
-  local text_fg = "#c0c0c0"
-
-  -- The elements to be formatted
   local elements = {}
-  -- How many cells have been formatted
-  local num_cells = 0
   local total_cells = #cells
 
   local function cell_color(cell_no)
     local distance_from_right = total_cells - cell_no
-    return colors[(distance_from_right % #colors) + 1]
+    return STATUS_COLORS[(distance_from_right % #STATUS_COLORS) + 1]
   end
 
-  -- Translate a cell into elements
-  local function push(text, is_last)
-    local cell_no = num_cells + 1
+  local function push(text, cell_no)
     local background = cell_color(cell_no)
 
     if cell_no == 1 then
@@ -96,19 +80,17 @@ wezterm.on("update-status", function(window, pane)
       table.insert(elements, { Foreground = { Color = background } })
       table.insert(elements, { Text = SOLID_LEFT_ARROW })
     end
-    table.insert(elements, { Foreground = { Color = text_fg } })
+    table.insert(elements, { Foreground = { Color = STATUS_TEXT_FG } })
     table.insert(elements, { Background = { Color = background } })
     table.insert(elements, { Text = " " .. text .. " " })
-    if not is_last then
+    if cell_no < total_cells then
       table.insert(elements, { Foreground = { Color = cell_color(cell_no + 1) } })
       table.insert(elements, { Text = SOLID_LEFT_ARROW })
     end
-    num_cells = num_cells + 1
   end
 
-  while #cells > 0 do
-    local cell = table.remove(cells, 1)
-    push(cell, #cells == 0)
+  for cell_no, cell in ipairs(cells) do
+    push(cell, cell_no)
   end
 
   window:set_right_status(wezterm.format(elements))
