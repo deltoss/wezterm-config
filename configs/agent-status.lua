@@ -10,10 +10,11 @@ local DEFAULT_NAME = "agent"
 local DEFAULT_ICON = "•"
 
 local STATUS_ICONS = {
-  attention = "󰳦",
-  working = "↻",
-  ready = "✓",
+  attention = { "󰳦" },
+  working = { "○", "◎", "◉", "◎" },
+  ready = { "✓" },
 }
+local animation_frame = 0
 
 local function read_json(path)
   local file = io.open(path, "r")
@@ -81,10 +82,10 @@ end
 
 local function to_session(status, path, now)
   if
-    type(status) ~= "table"
-    or type(status.expiresAt) ~= "number"
-    or status.expiresAt <= now
-    or not STATUS_ICONS[status.state]
+      type(status) ~= "table"
+      or type(status.expiresAt) ~= "number"
+      or status.expiresAt <= now
+      or not STATUS_ICONS[status.state]
   then
     return nil
   end
@@ -122,9 +123,12 @@ end
 function M.render()
   local sessions = load_sessions()
   local segments = {}
+  animation_frame = animation_frame % #STATUS_ICONS.working + 1
 
   for index, session in ipairs(sessions) do
-    segments[index] = session.icon .. STATUS_ICONS[session.state] .. " " .. session.name
+    local frames = STATUS_ICONS[session.state]
+    local status_icon = frames[(animation_frame - 1) % #frames + 1]
+    segments[index] = session.icon .. " " .. status_icon .. " " .. session.name
   end
 
   return segments
