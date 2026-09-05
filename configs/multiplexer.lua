@@ -6,6 +6,10 @@ local module = {}
 -- Maximize/restore round trip on reattach: forces a window state change and
 -- repaint, clearing stale content when the compositor resizes after first paint.
 wezterm.on("gui-attached", function()
+	if os.getenv("WEZTERM_SKIP_ATTACH_MAXIMIZE") == "1" then
+		return
+	end
+
 	local workspace = mux.get_active_workspace()
 	for _, window in ipairs(mux.all_windows()) do
 		if window:get_workspace() == workspace then
