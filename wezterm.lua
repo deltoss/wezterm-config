@@ -4,7 +4,6 @@ require("configs.status-bar")
 
 local config = wezterm.config_builder()
 
-require("configs.multiplexer").apply_to_config(config)
 require("configs.launch").apply_to_config(config)
 require("configs.ssh").apply_to_config(config)
 require("configs.appearance").apply_to_config(config)
