@@ -10,6 +10,5 @@ require("configs.appearance").apply_to_config(config)
 require("configs.tab-title").apply_to_config(config)
 require("configs.window-title").apply_to_config(config)
 require("configs.keys").apply_to_config(config)
-require("plugins.smart-splits-nvim").apply_to_config(config)
 
 return config

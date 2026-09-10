@@ -24,6 +24,10 @@ function module.apply_to_config(config)
     { key = "p",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
     { key = "PageUp",   mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     { key = "PageDown", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
+    { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "DownArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "UpArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    { key = "RightArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
     {
       key = "o",
       mods = "CTRL|SHIFT",
