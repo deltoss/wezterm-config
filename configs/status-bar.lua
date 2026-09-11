@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local agent_status = require("configs.agent-status")
 
-local CLOCK_FACES = { "🕐", "🕑", "🕒", "🕓", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛" }
+local CLOCK_FACES = { "🕐", "🕑", "🕒", "🕓", "🕔", "🕕", "🕖", "🕗", "🕘", "🕙", "🕚", "🕛" }
 local SOLID_LEFT_ARROW = utf8.char(0xe0b2)
 local STATUS_COLORS = {
   "#174574",
@@ -14,7 +14,7 @@ local STATUS_TEXT_FG = "#c0c0c0"
 
 local function get_clock_emoji()
   local hour = tonumber(wezterm.strftime("%I"))
-  return CLOCK_FACES[hour]
+  return CLOCK_FACES[hour] or "🕒"
 end
 
 wezterm.on("update-status", function(window, pane)

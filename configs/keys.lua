@@ -2,7 +2,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 
 local renameUtils = require("utils.rename")
-local terminalUtils = require("utils.terminal")
 require("utils.scrollback")
 
 local module = {}
@@ -142,16 +141,6 @@ function module.apply_to_config(config)
       action = wezterm.action.TogglePaneZoomState,
     },
     {
-      key = "i",
-      mods = "LEADER",
-      action = terminalUtils.toggleTerminalAction,
-    },
-    {
-      key = ";",
-      mods = "LEADER",
-      action = terminalUtils.toggleTerminalAction,
-    },
-    {
       key = ",",
       mods = "ALT",
       action = act.ActivateTabRelative(-1),
@@ -185,16 +174,6 @@ function module.apply_to_config(config)
       mods = "ALT",
       action = act.ActivateCopyMode,
       -- See Copy Mode: https://wezterm.org/copymode.html
-    },
-    {
-      key = "i",
-      mods = "ALT",
-      action = terminalUtils.toggleTerminalAction,
-    },
-    {
-      key = ";",
-      mods = "ALT",
-      action = terminalUtils.toggleTerminalAction,
     },
   }
 

@@ -1,10 +1,11 @@
 local wezterm = require("wezterm")
 
--- Equivalent to POSIX basename(3)
+-- Extract the final path component and hide Windows executable extensions.
 -- Given "/foo/bar" returns "bar"
 -- Given "c:\\foo\\bar" returns "bar"
 local function basename(s)
-  return string.gsub(s, "(.*[/\\])(.*)(%..*)", "%2")
+  local name = s:match("[^/\\]+$") or s
+  return (name:gsub("%.[eE][xX][eE]$", ""))
 end
 
 -- This function returns the suggested title for a tab.
