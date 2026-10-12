@@ -20,7 +20,8 @@ function module.apply_to_config(config)
     -- Turn off problematic default key bindings
     { key = "z",        mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     { key = "z",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
-    { key = "p",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
+    -- Preserve Shift: legacy forwarding makes Ctrl+Shift+P indistinguishable from Ctrl+P.
+    { key = "p",        mods = "CTRL|SHIFT", action = act.SendString("\x1b[112;6u") },
     { key = "PageUp",   mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     { key = "PageDown", mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     { key = "LeftArrow", mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
