@@ -17,6 +17,8 @@ function module.apply_to_config(config)
   }
 
   config.keys = {
+    -- Forward Ctrl+Insert so Pi can read images or text from the clipboard.
+    { key = "Insert",   mods = "CTRL",       action = act.SendString("\x1b[2;5~") },
     -- Turn off problematic default key bindings
     { key = "z",        mods = "CTRL",       action = wezterm.action.DisableDefaultAssignment },
     { key = "z",        mods = "CTRL|SHIFT", action = wezterm.action.DisableDefaultAssignment },
